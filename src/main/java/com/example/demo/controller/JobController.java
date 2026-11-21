@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CreateItemRequest;
-import com.example.demo.dto.ItemResponse;
-import com.example.demo.service.ItemService;
+import com.example.demo.dto.ExecutionOrderResponse;
+import com.example.demo.dto.JobItemResponse;
+import com.example.demo.service.JobService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,36 +20,38 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/items")
-public class ItemController {
-    private final ItemService itemService;
+@RequestMapping("/api/v1/jobs")
+public class JobController {
+    private final JobService jobService;
 
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
     }
 
     @PostMapping
-    public ResponseEntity<ItemResponse> create(@Valid @RequestBody CreateItemRequest request) {
-        log.info("Received request to create an item");
-        ItemResponse response = ItemResponse.from(itemService.create(request));
-        return ResponseEntity.created(URI.create("/api/v1/items/" + response.id())).body(response);
+    public ResponseEntity<JobItemResponse> submit(@Valid @RequestBody CreateItemRequest request) {
+        log.info("Received request to submit a job");
+        JobItemResponse response = JobItemResponse.from(jobService.create(request));
+        return ResponseEntity.created(URI.create("/api/v1/jobs/" + response.id())).body(response);
     }
 
-    @GetMapping("/{id}")
-    public ItemResponse getById(@PathVariable String id) {
-        return ItemResponse.from(itemService.getById(id));
+    @GetMapping("/executionOrder")
+    public ResponseEntity<ExecutionOrderResponse> getById() {
+        return ResponseEntity.ok(
+            new ExecutionOrderResponse(jobService.getOrder())
+        );
     }
 
-    @GetMapping
-    public List<ItemResponse> getAll() {
-        return itemService.getAll().stream().map(ItemResponse::from).toList();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        itemService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+//    @GetMapping
+//    public List<JobItemResponse> getAll() {
+//        return jobService.getAll().stream().map(JobItemResponse::from).toList();
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> delete(@PathVariable String id) {
+//        jobService.delete(id);
+//        return ResponseEntity.noContent().build();
+//    }
 
 //    @DeleteMapping
 //    public ResponseEntity<Void> deleteAll() {

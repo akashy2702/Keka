@@ -1,18 +1,19 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Item;
+import com.example.demo.model.JobItem;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ItemRepository {
-    Item save(Item item);
+public interface JobRepository {
+    JobItem save(JobItem jobItem);
 
-    Optional<Item> findById(String id);
-
-    List<Item> findAll();
-
-    void deleteById(String id);
-
-    void deleteAll();
+    List<String> getOrder();
+//    Optional<JobItem> findById(String id);
+//
+//    List<JobItem> findAll();
+//
+//    void deleteById(String id);
+//
+//    void deleteAll();
 }

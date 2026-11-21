@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ItemControllerTest {
+class JobJobControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -33,7 +33,7 @@ class ItemControllerTest {
         mockMvc.perform(post("/api/v1/items")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"Sample Item","description":"Test item"}
+                                {"name":"Sample Item","description":"Test jobItem"}
                                 """))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", not(isEmptyOrNullString())))
@@ -46,7 +46,7 @@ class ItemControllerTest {
         mockMvc.perform(post("/api/v1/items")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"  ","description":"Test item"}
+                                {"name":"  ","description":"Test jobItem"}
                                 """))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("Name must not be blank"))
@@ -107,7 +107,7 @@ class ItemControllerTest {
         MvcResult result = mockMvc.perform(post("/api/v1/items")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"name":"Sample Item","description":"Test item"}
+                                {"name":"Sample Item","description":"Test jobItem"}
                                 """))
                 .andExpect(status().isCreated())
                 .andReturn();

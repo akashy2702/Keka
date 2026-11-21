@@ -1,6 +1,4 @@
 package com.example.demo.model;
 
-import java.time.LocalDateTime;
-
-public record Item(String id, String name, String description, LocalDateTime createdAt) {
+public record JobItem(String id, JobPriority priority, String name, String description, Long scheduleAt) {
 }

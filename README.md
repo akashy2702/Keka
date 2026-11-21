@@ -12,12 +12,12 @@ The application listens on `http://localhost:8080`. No database or external serv
 
 ## API
 
-### Create an item
+### Create an jobItem
 
 ```bash
 curl -i -X POST http://localhost:8080/api/v1/items \
   -H 'Content-Type: application/json' \
-  -d '{"name":"Sample Item","description":"Test item"}'
+  -d '{"name":"Sample Item","description":"Test jobItem"}'
 ```
 
 Returns `201 Created` with a `Location` header and a body such as:
@@ -26,14 +26,14 @@ Returns `201 Created` with a `Location` header and a body such as:
 {
   "id": "generated-uuid",
   "name": "Sample Item",
-  "description": "Test item",
+  "description": "Test jobItem",
   "createdAt": "2026-11-20T10:00:00"
 }
 ```
 
 `name` is required, cannot be blank, and is limited to 100 characters. `description` is optional and limited to 1000 characters.
 
-### Get an item
+### Get an jobItem
 
 ```bash
 curl http://localhost:8080/api/v1/items/{id}
@@ -45,7 +45,7 @@ curl http://localhost:8080/api/v1/items/{id}
 curl http://localhost:8080/api/v1/items
 ```
 
-### Delete an item
+### Delete an jobItem
 
 ```bash
 curl -i -X DELETE http://localhost:8080/api/v1/items/{id}
@@ -73,4 +73,4 @@ Successful deletion returns `204 No Content`. Missing items return `404`; invali
 
 ## Structure
 
-Application code is under `com.example.demo`, split into `controller`, `service`, `repository`, `dto`, `model`, `client`, `config`, and `exception`. `ItemRepository` is the storage boundary; its in-memory implementation can be replaced with a database-backed implementation when needed.
+Application code is under `com.example.demo`, split into `controller`, `service`, `repository`, `dto`, `model`, `client`, `config`, and `exception`. `JobRepository` is the storage boundary; its in-memory implementation can be replaced with a database-backed implementation when needed.

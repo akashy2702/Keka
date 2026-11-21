@@ -1,4 +1,9 @@
 package com.example.demo.dto;
 
-public class ExecutionOrderResponse {
+import com.example.demo.model.JobItem;
+
+import java.util.List;
+
+public record ExecutionOrderResponse(List<String> order) {
+
 }
